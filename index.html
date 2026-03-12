@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes"/>
+  <title>🎵 HAPPY BIRTHDAY SHAVYA! 🎵</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background: #0a0f2a;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      min-height: 100vh;
+      color: white;
+      overflow-x: hidden;
+      position: relative;
+      touch-action: pan-y pinch-zoom;
+    }
+
+    /* Animated Background */
+    .party-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(125deg, #ff6b6b, #ffd93d, #6bcb77, #ff69b4, #9b59b6);
+      background-size: 500% 500%;
+      animation: partyGradient 15s ease infinite;
+      z-index: -2;
+    }
+
+    @keyframes partyGradient {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .floating-balloons {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .balloon {
+      position: absolute;
+      font-size: clamp(1.5rem, 5vw, 2.5rem);
+      animation: balloonFloat 8s linear infinite;
+    }
+
+    @keyframes balloonFloat {
+      0% { transform: translateY(100vh) translateX(0) rotate(0deg); opacity: 0; }
+      10% { opacity: 0.8; }
+      90% { opacity: 0.8; }
+      100% { transform: translateY(-20vh) translateX(100px) rotate(360deg); opacity: 0; }
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 15px;
+      position: relative;
+    }
+
+    /* Header */
+    .birthday-header {
+      text-align: center;
+      padding: 20px 0 15px;
+    }
+
+    .birthday-header h1 {
+      font-size: clamp(2.5rem, 10vw, 5rem);
+      color: white;
+      text-shadow: 2px 2px 0 #ff69b4, 4px 4px 0 #ffd700;
+      margin-bottom: 10px;
+      animation: headerBounce 2s infinite;
+      line-height: 1.2;
+      word-break: break-word;
+    }
+
+    @keyframes headerBounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .birthday-header p {
+      font-size: clamp(1.3rem, 5vw, 2rem);
+      color: #ffd700;
+    }
+
+    /* Progress Bar */
+    .progress-box {
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-radius: 50px;
+      padding: 15px;
+      margin: 15px 0;
+      border: 2px solid #ffd700;
+    }
+
+    .progress-text {
+      text-align: center;
+      color: #ffd700;
+      font-size: clamp(1rem, 4vw, 1.3rem);
+      margin-bottom: 8px;
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 12px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 25%;
+      background: linear-gradient(90deg, #ffd700, #ff69b4);
+      transition: width 0.5s;
+    }
+
+    /* Game Cards - Mobile Optimized */
+    .games-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin: 20px 0;
+    }
+
+    .game-card {
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      border-radius: 20px;
+      padding: 15px 5px;
+      text-align: center;
+      cursor: pointer;
+      border: 2px solid #ff69b4;
+      transition: all 0.3s;
+      position: relative;
+      min-height: 100px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      touch-action: manipulation;
+    }
+
+    .game-card:active {
+      transform: scale(0.95);
+      background: rgba(255,105,180,0.3);
+    }
+
+    .game-card.completed {
+      opacity: 0.5;
+      filter: grayscale(0.5);
+      pointer-events: none;
+    }
+
+    .game-card.active-game {
+      border-color: #ffd700;
+      box-shadow: 0 0 20px rgba(255,215,0,0.5);
+    }
+
+    .game-number {
+      position: absolute;
+      top: 5px;
+      left: 5px;
+      background: #ff69b4;
+      color: white;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      font-weight: bold;
+    }
+
+    .game-icon {
+      font-size: clamp(1.8rem, 6vw, 2.5rem);
+      margin-bottom: 5px;
+    }
+
+    .game-title {
+      font-size: clamp(0.8rem, 3vw, 1rem);
+      color: #ffd700;
+      font-weight: bold;
+    }
+
+    /* Game Modal - Full Screen Mobile */
+    .game-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.98);
+      z-index: 2000;
+      justify-content: center;
+      align-items: center;
+      padding: 15px;
+      overflow-y: auto;
+      touch-action: pan-y;
+    }
+
+    .game-modal.active {
+      display: flex;
+    }
+
+    .game-screen {
+      background: linear-gradient(135deg, #1e1f3a, #2a2b4a);
+      border-radius: 40px;
+      padding: 25px 20px;
+      max-width: 500px;
+      width: 100%;
+      border: 4px solid #ffd700;
+      animation: modalPop 0.3s;
+      max-height: 95vh;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    @keyframes modalPop {
+      0% { transform: scale(0.9); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .game-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #ff69b4;
+      padding-bottom: 10px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .game-header h2 {
+      color: #ffd700;
+      font-size: clamp(1.5rem, 6vw, 2rem);
+    }
+
+    .game-progress {
+      color: #ff69b4;
+      font-size: clamp(0.9rem, 4vw, 1.1rem);
+    }
+
+    /* GAME 1 - TAP TAP (Mobile Optimized) */
+    .click-game {
+      text-align: center;
+      padding: 10px;
+    }
+
+    .big-emoji {
+      font-size: clamp(6rem, 25vw, 8rem);
+      cursor: pointer;
+      margin: 20px 0;
+      transition: all 0.1s;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+      display: inline-block;
+    }
+
+    .big-emoji:active {
+      transform: scale(1.2);
+    }
+
+    .click-count {
+      font-size: clamp(1.5rem, 6vw, 2rem);
+      color: #ffd700;
+      margin: 20px 0;
+    }
+
+    /* GAME 2 - CATCH STARS (Mobile Optimized) */
+    .catch-game {
+      text-align: center;
+    }
+
+    .catch-area {
+      height: 50vh;
+      min-height: 300px;
+      max-height: 500px;
+      background: #1e272e;
+      border-radius: 30px;
+      position: relative;
+      overflow: hidden;
+      margin: 15px 0;
+      border: 3px solid #ff69b4;
+      touch-action: none;
+    }
+
+    .falling-emoji {
+      position: absolute;
+      font-size: clamp(2rem, 8vw, 3rem);
+      cursor: pointer;
+      animation: fall linear forwards;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
+
+    @keyframes fall {
+      0% { top: -10%; }
+      100% { top: 110%; }
+    }
+
+    .catch-score {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: #ff69b4;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 30px;
+      border: 2px solid gold;
+      font-size: clamp(1rem, 4vw, 1.2rem);
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    /* GAME 3 - MATCHING PAIRS (Mobile Optimized) */
+    .match-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin: 20px 0;
+    }
+
+    .match-card {
+      aspect-ratio: 1;
+      background: #ff69b4;
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: clamp(1.5rem, 5vw, 2rem);
+      cursor: pointer;
+      box-shadow: 0 4px 0 #ff1493;
+      transition: all 0.2s;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
+
+    .match-card:active {
+      transform: scale(0.95);
+    }
+
+    .match-card.flipped {
+      background: #ffd700;
+    }
+
+    .match-card.matched {
+      background: #4cd137;
+      cursor: default;
+      opacity: 0.7;
+    }
+
+    /* GAME 4 - SPIN THE WHEEL (Mobile Optimized) */
+    .wheel-game {
+      text-align: center;
+      padding: 10px 0;
+    }
+
+    .wheel {
+      width: min(250px, 70vw);
+      height: min(250px, 70vw);
+      margin: 20px auto;
+      border-radius: 50%;
+      background: conic-gradient(#ff6b6b 0deg 90deg, #ffd93d 90deg 180deg, #6bcb77 180deg 270deg, #ff69b4 270deg 360deg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border: 5px solid gold;
+      transition: transform 3s;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
+
+    .wheel:active {
+      transform: scale(0.98);
+    }
+
+    .wheel-center {
+      width: min(60px, 20vw);
+      height: min(60px, 20vw);
+      background: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: clamp(1.2rem, 5vw, 1.8rem);
+    }
+
+    /* Transition Screens (Mobile Optimized) */
+    .transition-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.95);
+      z-index: 2500;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      touch-action: manipulation;
+    }
+
+    .transition-screen.active {
+      display: flex;
+    }
+
+    .transition-content {
+      background: linear-gradient(135deg, #ff69b4, #ffd700);
+      border-radius: 50px;
+      padding: 30px 20px;
+      text-align: center;
+      border: 5px solid white;
+      animation: transitionPop 0.3s;
+      width: 100%;
+      max-width: 500px;
+    }
+
+    @keyframes transitionPop {
+      0% { transform: scale(0.9); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .transition-emoji {
+      font-size: clamp(3rem, 12vw, 4rem);
+      margin-bottom: 15px;
+      animation: emojiFloat 2s infinite;
+    }
+
+    @keyframes emojiFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+
+    .transition-text {
+      font-size: clamp(1.3rem, 5vw, 1.8rem);
+      color: white;
+      margin: 15px 0;
+      line-height: 1.4;
+    }
+
+    .transition-next {
+      font-size: clamp(1rem, 4vw, 1.2rem);
+      color: white;
+      margin: 10px 0;
+    }
+
+    /* Buttons - Mobile Friendly */
+    .next-game-btn, .game-btn {
+      background: #ffd700;
+      color: #ff69b4;
+      border: none;
+      padding: 15px 30px;
+      font-size: clamp(1.1rem, 4vw, 1.3rem);
+      border-radius: 50px;
+      cursor: pointer;
+      margin: 15px auto;
+      display: inline-block;
+      border: 3px solid white;
+      font-weight: bold;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+      min-width: 200px;
+      max-width: 90%;
+    }
+
+    .next-game-btn:active, .game-btn:active {
+      transform: scale(0.95);
+      background: #ff69b4;
+      color: white;
+    }
+
+    .score-text {
+      color: #ffd700;
+      font-size: clamp(1.1rem, 4vw, 1.3rem);
+      text-align: center;
+      margin: 15px 0;
+    }
+
+    /* Video Party (Mobile Optimized) */
+    .video-party {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #000;
+      z-index: 3000;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      padding: 15px;
+      touch-action: manipulation;
+    }
+
+    .video-party.active {
+      display: flex;
+    }
+
+    .video-container {
+      width: 100%;
+      max-width: 800px;
+      background: linear-gradient(45deg, #1a1a2e, #16213e);
+      border-radius: 40px;
+      overflow: hidden;
+      border: 5px solid #ffd700;
+    }
+
+    .video-header {
+      background: linear-gradient(90deg, #ff69b4, #ffd700);
+      padding: 15px;
+      text-align: center;
+      font-size: clamp(1.2rem, 5vw, 1.8rem);
+      color: white;
+      font-weight: bold;
+    }
+
+    .video-screen {
+      aspect-ratio: 16/9;
+      background: radial-gradient(circle at center, #4a1a5a, #1a0a2a);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      padding: 20px;
+    }
+
+    .floating-hearts {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+    }
+
+    .video-heart {
+      position: absolute;
+      color: #ff69b4;
+      font-size: clamp(1rem, 4vw, 1.5rem);
+      animation: videoHeartFloat 4s linear infinite;
+    }
+
+    @keyframes videoHeartFloat {
+      0% { transform: translateY(100%) rotate(0deg); opacity: 0; }
+      50% { opacity: 0.8; }
+      100% { transform: translateY(-100%) rotate(360deg); opacity: 0; }
+    }
+
+    .video-title {
+      font-size: clamp(1.8rem, 6vw, 2.5rem);
+      color: white;
+      text-shadow: 2px 2px 0 #ff69b4, 4px 4px 0 #ffd700;
+      z-index: 10;
+      animation: videoGlow 2s infinite;
+      margin: 10px 0;
+    }
+
+    .video-name {
+      font-size: clamp(1.5rem, 5vw, 2rem);
+      color: #ffd700;
+      text-shadow: 2px 2px 0 #ff69b4;
+      z-index: 10;
+      margin: 10px 0;
+    }
+
+    .video-emoji-line {
+      display: flex;
+      gap: 15px;
+      font-size: clamp(1.8rem, 6vw, 2.5rem);
+      z-index: 10;
+      animation: emojiDance 2s infinite;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    @keyframes emojiDance {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .video-message {
+      font-size: clamp(1.1rem, 4vw, 1.5rem);
+      color: white;
+      margin: 15px 0;
+      z-index: 10;
+    }
+
+    .video-footer {
+      background: #0a0a1a;
+      padding: 15px;
+    }
+
+    .video-progress {
+      width: 100%;
+      height: 8px;
+      background: #333;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .video-progress-fill {
+      height: 100%;
+      width: 100%;
+      background: linear-gradient(90deg, #ffd700, #ff69b4);
+      animation: videoLoad 16s linear forwards;
+    }
+
+    @keyframes videoLoad {
+      0% { width: 0%; }
+      100% { width: 100%; }
+    }
+
+    .video-time {
+      display: flex;
+      justify-content: space-between;
+      color: white;
+      margin-top: 10px;
+      font-size: clamp(0.8rem, 3vw, 0.9rem);
+    }
+
+    .replay-btn {
+      margin-top: 20px;
+      background: #ffd700;
+      border: none;
+      padding: 15px 40px;
+      font-size: clamp(1.2rem, 5vw, 1.5rem);
+      border-radius: 50px;
+      color: #ff69b4;
+      font-weight: bold;
+      cursor: pointer;
+      border: 3px solid white;
+      transition: all 0.3s;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .replay-btn:active {
+      transform: scale(0.95);
+      background: #ff69b4;
+      color: white;
+    }
+
+    .friend {
+      position: fixed;
+      bottom: 15px;
+      right: 15px;
+      z-index: 100;
+    }
+
+    .friend-icon {
+      width: min(60px, 15vw);
+      height: min(60px, 15vw);
+      background: #ff69b4;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: clamp(1.5rem, 6vw, 2rem);
+      cursor: pointer;
+      border: 3px solid gold;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .friend-icon:active {
+      transform: scale(0.9);
+    }
+
+    /* Touch optimizations */
+    button, [onclick] {
+      cursor: pointer;
+      touch-action: manipulation;
+    }
+
+    /* Prevent text selection */
+    .game-card, .big-emoji, .falling-emoji, .match-card, .wheel {
+      user-select: none;
+      -webkit-user-select: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="party-bg"></div>
+  <div class="floating-balloons" id="balloons"></div>
+
+  <div class="container">
+    <div class="birthday-header">
+      <h1>🎉 HAPPY BIRTHDAY! 🎉</h1>
+      <p>Shavya 🌸</p>
+    </div>
+
+    <div class="progress-box">
+      <div class="progress-text" id="progressText">Game 1 of 4</div>
+      <div class="progress-track">
+        <div class="progress-fill" id="progressFill" style="width: 25%"></div>
+      </div>
+    </div>
+
+    <div class="games-row">
+      <div class="game-card active-game" id="game1">
+        <div class="game-number">1</div>
+        <div class="game-icon">👆</div>
+        <div class="game-title">Tap Tap</div>
+      </div>
+      <div class="game-card" id="game2">
+        <div class="game-number">2</div>
+        <div class="game-icon">⭐</div>
+        <div class="game-title">Catch Stars</div>
+      </div>
+      <div class="game-card" id="game3">
+        <div class="game-number">3</div>
+        <div class="game-icon">🎴</div>
+        <div class="game-title">Match Pairs</div>
+      </div>
+      <div class="game-card" id="game4">
+        <div class="game-number">4</div>
+        <div class="game-icon">🎡</div>
+        <div class="game-title">Spin & Win</div>
+      </div>
+    </div>
+
+    <!-- GAME 1 - TAP TAP -->
+    <div class="game-modal active" id="game1Modal">
+      <div class="game-screen">
+        <div class="game-header">
+          <h2>👆 TAP TAP</h2>
+          <div class="game-progress">Game 1 of 4</div>
+        </div>
+        <div class="click-game">
+          <div class="big-emoji" onclick="tapIncrement()" ontouchstart="tapIncrement()" id="tapEmoji">🎯</div>
+          <div class="click-count" id="tapCount">0 / 20</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GAME 2 - CATCH STARS -->
+    <div class="game-modal" id="game2Modal">
+      <div class="game-screen">
+        <div class="game-header">
+          <h2>⭐ CATCH STARS</h2>
+          <div class="game-progress">Game 2 of 4</div>
+        </div>
+        <div class="catch-game">
+          <div class="catch-area" id="starArea">
+            <div class="catch-score" id="starScore">⭐ 0/10</div>
+          </div>
+          <button class="game-btn" onclick="startStarGame()" ontouchstart="startStarGame()">START</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- GAME 3 - MATCH PAIRS -->
+    <div class="game-modal" id="game3Modal">
+      <div class="game-screen">
+        <div class="game-header">
+          <h2>🎴 MATCH PAIRS</h2>
+          <div class="game-progress">Game 3 of 4</div>
+        </div>
+        <div class="match-grid" id="matchGrid"></div>
+        <div class="score-text" id="matchScore">Pairs: 0/4</div>
+      </div>
+    </div>
+
+    <!-- GAME 4 - SPIN & WIN -->
+    <div class="game-modal" id="game4Modal">
+      <div class="game-screen">
+        <div class="game-header">
+          <h2>🎡 SPIN & WIN</h2>
+          <div class="game-progress">Game 4 of 4</div>
+        </div>
+        <div class="wheel-game">
+          <div class="wheel" id="wheel" onclick="spinWheel()" ontouchstart="spinWheel()">
+            <div class="wheel-center">🎁</div>
+          </div>
+          <div class="score-text" id="wheelText">Click to spin!</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TRANSITION SCREENS -->
+    <div class="transition-screen" id="transition1">
+      <div class="transition-content">
+        <div class="transition-emoji">🎈</div>
+        <div class="transition-text">You light up every room you enter!</div>
+        <div class="transition-next">Get ready for Game 2...</div>
+        <button class="next-game-btn" onclick="nextGame(2)" ontouchstart="nextGame(2)">NEXT GAME ➡️</button>
+      </div>
+    </div>
+
+    <div class="transition-screen" id="transition2">
+      <div class="transition-content">
+        <div class="transition-emoji">⭐</div>
+        <div class="transition-text">You're the brightest star in our family!</div>
+        <div class="transition-next">Get ready for Game 3...</div>
+        <button class="next-game-btn" onclick="nextGame(3)" ontouchstart="nextGame(3)">NEXT GAME ➡️</button>
+      </div>
+    </div>
+
+    <div class="transition-screen" id="transition3">
+      <div class="transition-content">
+        <div class="transition-emoji">💖</div>
+        <div class="transition-text">Your smile makes the world more beautiful!</div>
+        <div class="transition-next">Get ready for Game 4...</div>
+        <button class="next-game-btn" onclick="nextGame(4)" ontouchstart="nextGame(4)">NEXT GAME ➡️</button>
+      </div>
+    </div>
+
+    <!-- BEAUTIFUL BIRTHDAY VIDEO -->
+    <div class="video-party" id="videoParty">
+      <div class="video-container">
+        <div class="video-header">
+          🎵 HAPPY BIRTHDAY SHAVYA! 🎵
+        </div>
+        <div class="video-screen" id="videoScreen">
+          <div class="floating-hearts" id="videoHearts"></div>
+          <div class="video-title" id="videoTitle">🎂 HAPPY BIRTHDAY!</div>
+          <div class="video-name" id="videoName">SHAVYA</div>
+          <div class="video-emoji-line" id="videoEmojis">
+            <span>✨</span>
+            <span>🎈</span>
+            <span>🎉</span>
+            <span>💖</span>
+          </div>
+          <div class="video-message" id="videoMessage">You're the best sister ever!</div>
+        </div>
+        <div class="video-footer">
+          <div class="video-progress">
+            <div class="video-progress-fill" id="videoProgress"></div>
+          </div>
+          <div class="video-time">
+            <span>0:00</span>
+            <span id="videoTimer">0:16</span>
+          </div>
+        </div>
+      </div>
+      <button class="replay-btn" onclick="location.reload()" ontouchstart="location.reload()">✨ PLAY AGAIN ✨</button>
+    </div>
+
+    <div class="friend">
+      <div class="friend-icon" onclick="alert('🎉 Happy Birthday Shavya! 🎉')" ontouchstart="alert('🎉 Happy Birthday Shavya! 🎉')">
+        🦊
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Floating balloons
+    for (let i = 0; i < 15; i++) {
+      let b = document.createElement('div');
+      b.className = 'balloon';
+      b.textContent = ['🎈', '🎈', '🎈', '🎈', '🎈'][Math.floor(Math.random() * 5)];
+      b.style.left = Math.random() * 100 + '%';
+      b.style.animationDelay = Math.random() * 5 + 's';
+      b.style.fontSize = (Math.random() * 1.5 + 1.5) + 'rem';
+      document.getElementById('balloons').appendChild(b);
+    }
+
+    // Game states
+    let currentGame = 1;
+    let tapCount = 0;
+    let starInterval;
+    let starsCaught = 0;
+    let matchPairs = [];
+    let matchedCount = 0;
+    let wheelSpun = false;
+    let flippedCards = [];
+
+    // Initialize first game
+    initMatchGame();
+
+    // Next game function
+    function nextGame(gameNumber) {
+      // Hide all modals and transitions
+      document.getElementById('game1Modal').classList.remove('active');
+      document.getElementById('game2Modal').classList.remove('active');
+      document.getElementById('game3Modal').classList.remove('active');
+      document.getElementById('game4Modal').classList.remove('active');
+      document.getElementById('transition1').classList.remove('active');
+      document.getElementById('transition2').classList.remove('active');
+      document.getElementById('transition3').classList.remove('active');
+      
+      // Show next game
+      document.getElementById('game' + gameNumber + 'Modal').classList.add('active');
+      
+      // Update progress bar
+      document.getElementById('progressFill').style.width = (gameNumber * 25) + '%';
+      document.getElementById('progressText').textContent = 'Game ' + gameNumber + ' of 4';
+      
+      // Highlight current game card
+      for (let i = 1; i <= 4; i++) {
+        document.getElementById('game' + i).classList.remove('active-game');
+      }
+      document.getElementById('game' + gameNumber).classList.add('active-game');
+      
+      // Reset game if needed
+      if (gameNumber === 2) {
+        resetStarGame();
+      } else if (gameNumber === 3) {
+        initMatchGame();
+      } else if (gameNumber === 4) {
+        resetWheel();
+      }
+    }
+
+    // GAME 1 - TAP TAP
+    function tapIncrement() {
+      if (tapCount >= 20) return;
+      tapCount++;
+      document.getElementById('tapCount').textContent = tapCount + ' / 20';
+      
+      if (tapCount >= 20) {
+        document.getElementById('game1Modal').classList.remove('active');
+        document.getElementById('transition1').classList.add('active');
+      }
+    }
+
+    // GAME 2 - CATCH STARS
+    function resetStarGame() {
+      starsCaught = 0;
+      let area = document.getElementById('starArea');
+      area.innerHTML = '<div class="catch-score" id="starScore">⭐ 0/10</div>';
+      if (starInterval) clearInterval(starInterval);
+    }
+
+    function startStarGame() {
+      starsCaught = 0;
+      document.getElementById('starScore').innerHTML = '⭐ 0/10';
+      if (starInterval) clearInterval(starInterval);
+      
+      starInterval = setInterval(() => {
+        if (starsCaught >= 10) return;
+        
+        let star = document.createElement('div');
+        star.className = 'falling-emoji';
+        star.textContent = '⭐';
+        star.style.left = Math.random() * 80 + '%';
+        star.style.animationDuration = (Math.random() * 2 + 3) + 's';
+        
+        star.onclick = function(e) {
+          e.stopPropagation();
+          if (starsCaught >= 10) return;
+          starsCaught++;
+          document.getElementById('starScore').innerHTML = '⭐ ' + starsCaught + '/10';
+          this.remove();
+          
+          if (starsCaught >= 10) {
+            clearInterval(starInterval);
+            document.getElementById('game2Modal').classList.remove('active');
+            document.getElementById('transition2').classList.add('active');
+          }
+        };
+        
+        star.ontouchstart = function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          if (starsCaught >= 10) return;
+          starsCaught++;
+          document.getElementById('starScore').innerHTML = '⭐ ' + starsCaught + '/10';
+          this.remove();
+          
+          if (starsCaught >= 10) {
+            clearInterval(starInterval);
+            document.getElementById('game2Modal').classList.remove('active');
+            document.getElementById('transition2').classList.add('active');
+          }
+        };
+        
+        document.getElementById('starArea').appendChild(star);
+        
+        setTimeout(() => {
+          if (star.parentNode) star.remove();
+        }, 4000);
+      }, 800);
+    }
+
+    // GAME 3 - MATCH PAIRS
+    function initMatchGame() {
+      let emojis = ['🐶', '🐱', '🐭', '🐹'];
+      matchPairs = [...emojis, ...emojis];
+      matchPairs.sort(() => Math.random() - 0.5);
+      matchedCount = 0;
+      flippedCards = [];
+      
+      let grid = document.getElementById('matchGrid');
+      grid.innerHTML = '';
+      
+      matchPairs.forEach((emoji, i) => {
+        let card = document.createElement('div');
+        card.className = 'match-card';
+        card.dataset.emoji = emoji;
+        card.dataset.index = i;
+        card.onclick = () => flipMatchCard(card);
+        card.ontouchstart = (e) => {
+          e.preventDefault();
+          flipMatchCard(card);
+        };
+        grid.appendChild(card);
+      });
+      document.getElementById('matchScore').textContent = 'Pairs: 0/4';
+    }
+
+    function flipMatchCard(card) {
+      if (card.classList.contains('flipped') || card.classList.contains('matched')) return;
+      if (flippedCards.length === 2) return;
+
+      card.classList.add('flipped');
+      card.textContent = card.dataset.emoji;
+      flippedCards.push(card);
+
+      if (flippedCards.length === 2) {
+        setTimeout(checkMatch, 500);
+      }
+    }
+
+    function checkMatch() {
+      let [card1, card2] = flippedCards;
+      
+      if (card1.dataset.emoji === card2.dataset.emoji) {
+        card1.classList.add('matched');
+        card2.classList.add('matched');
+        matchedCount++;
+        document.getElementById('matchScore').textContent = 'Pairs: ' + matchedCount + '/4';
+        
+        if (matchedCount >= 4) {
+          document.getElementById('game3Modal').classList.remove('active');
+          document.getElementById('transition3').classList.add('active');
+        }
+      } else {
+        card1.classList.remove('flipped');
+        card2.classList.remove('flipped');
+        card1.textContent = '';
+        card2.textContent = '';
+      }
+      flippedCards = [];
+    }
+
+    // GAME 4 - SPIN WHEEL
+    function resetWheel() {
+      wheelSpun = false;
+      document.getElementById('wheel').style.transform = 'rotate(0deg)';
+      document.getElementById('wheelText').textContent = 'Tap to spin!';
+    }
+
+    function spinWheel() {
+      if (wheelSpun) return;
+      wheelSpun = true;
+      
+      let wheel = document.getElementById('wheel');
+      let spins = Math.floor(Math.random() * 360) + 720;
+      wheel.style.transform = 'rotate(' + spins + 'deg)';
+      document.getElementById('wheelText').textContent = '✨ You won! ✨';
+      
+      setTimeout(() => {
+        document.getElementById('game4Modal').classList.remove('active');
+        document.getElementById('videoParty').classList.add('active');
+        playVideo();
+      }, 1000);
+    }
+
+    // Beautiful Video
+    function playVideo() {
+      const scenes = [
+        { 
+          title: '🎂 HAPPY BIRTHDAY!', 
+          name: 'SHAVYA', 
+          message: 'You are so special!',
+          emoji: '✨ 🎈 🎉 💖'
+        },
+        { 
+          title: '🌟 YOU ARE AMAZING!', 
+          name: 'SHAVYA', 
+          message: 'The best sister in the world!',
+          emoji: '⭐ 🎂 🎁 🎀'
+        },
+        { 
+          title: '💖 WE LOVE YOU!', 
+          name: 'SHAVYA', 
+          message: 'Hope your day is magical!',
+          emoji: '🌸 🦋 🎈 ✨'
+        },
+        { 
+          title: '🎉 CELEBRATE!', 
+          name: 'SHAVYA', 
+          message: 'You deserve all the joy!',
+          emoji: '🥳 🎊 🎉 🎈'
+        }
+      ];
+
+      // Create floating hearts
+      for (let i = 0; i < 20; i++) {
+        let h = document.createElement('div');
+        h.className = 'video-heart';
+        h.textContent = ['❤️', '💖', '💗', '💓', '💕'][Math.floor(Math.random() * 5)];
+        h.style.left = Math.random() * 100 + '%';
+        h.style.animationDelay = Math.random() * 4 + 's';
+        h.style.fontSize = (Math.random() * 1 + 1) + 'rem';
+        document.getElementById('videoHearts').appendChild(h);
+      }
+
+      let index = 0;
+      const titleEl = document.getElementById('videoTitle');
+      const nameEl = document.getElementById('videoName');
+      const msgEl = document.getElementById('videoMessage');
+      const emojiEl = document.getElementById('videoEmojis');
+      const timerEl = document.getElementById('videoTimer');
+
+      const interval = setInterval(() => {
+        index = (index + 1) % scenes.length;
+        titleEl.textContent = scenes[index].title;
+        nameEl.textContent = scenes[index].name;
+        msgEl.textContent = scenes[index].message;
+        emojiEl.innerHTML = scenes[index].emoji.split(' ').map(e => `<span>${e}</span>`).join('');
+        
+        let seconds = (index + 1) * 4;
+        timerEl.textContent = '0:' + (seconds < 10 ? '0' : '') + seconds;
+      }, 4000);
+
+      setTimeout(() => clearInterval(interval), 16000);
+    }
+  </script>
+</body>
+</html>
